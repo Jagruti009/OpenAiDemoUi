@@ -1,0 +1,43 @@
+<div class="container mt-5" style="background-color: #DDDDDD;">
+    <h2>Language Migration</h2>
+    <form class="" (submit)="onSubmit()">
+      <div class="form-group mt-3">
+        <label for="solutionPath">Give your solution file path:</label>
+        <input name="solutionPath" type="text" class="form-control" id="solutionPath" [(ngModel)]="solutionPath" required placeholder="C:\fakePath\DemoProject\DemoProject.sln">
+      </div>
+  
+      <!-- New label and input for Output Folder Path -->
+      <!-- <div class="form-group">
+        <label for="outputFolderPath">Output Folder Path:</label>
+        <input name="ofp" type="text" class="form-control" id="outputFolderPath" [(ngModel)]="outputFolderPath" required>
+      </div> -->
+  
+      <button type="submit" class="btn btn-primary mt-3" >Submit</button>
+    </form>
+  
+    <hr>
+  
+    <!-- Use *ngIf to conditionally display the table -->
+    <table class="table table-striped" *ngIf="projectList.length > 0">
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projectList">
+          <td>{{ project.name }}</td>
+          <td>
+            <a
+              [routerLink]="['/process-folder', { filePath: project.filePath, name: project.name }]"
+              class="btn btn-success"
+            >
+              Select
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-toast></ng-toast>

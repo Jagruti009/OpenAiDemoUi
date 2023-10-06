@@ -1,0 +1,93 @@
+<!-- migrate-version.component.html -->
+
+<div class="container mt-4">
+    <h2 class="mb-4">Enter the location of the project file</h2>
+  
+    <div class="form-group">
+      <label for="projectPath">Project Path:</label>
+      <input name="inputPath" type="text" id="projectPath" class="form-control" [(ngModel)]="projectPath" placeholder="Enter project path">
+    </div>
+  
+    <button class="btn btn-primary m-2" (click)="FindTargetFramework()">Submit</button>
+  
+    <div *ngIf="targetFramework" class="mt-4">
+      <button class="btn btn-warning m-2" disabled>Target Framework: {{ targetFramework }}</button>
+      <div>
+        <button class="btn btn-info m-2" (click)="listAllContent()">List All Content</button>
+        <button class="btn btn-info m-2" (click)="listProjectFolders()">List Project Folders</button>
+        <button class="btn btn-info m-2" (click)="listFilesInFolder()">List Files in Folder</button>
+      </div>
+    </div>
+    <div *ngIf="activeAction === 'listAll' && FolderContents.length > 0" class="mt-4">
+        <h3>List of All Files</h3>
+        <div class="m-3">
+          <input type="text" [(ngModel)]="searchAll" (ngModelChange)="updateFilteredData()" placeholder="Search All Files" class="form-control">
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of FolderContents">
+              <td>{{ file }}</td>
+              <td>
+                <button class="btn btn-warning" >Process</button>
+              </td>
+            </tr>
+            <tr *ngIf="FolderContents.length === 0">
+              <td colspan="2">No results found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <div *ngIf="activeAction === 'listFolders' && ProjectFolders.length > 0" class="mt-4">
+        <h3>List of Folders in Project</h3>
+        <div class="m-3">
+            <input type="text" [(ngModel)]="searchFolders" (ngModelChange)="updateFilteredData()" placeholder="Search All Files" class="form-control">
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of ProjectFolders">
+              <td>{{ file }}</td>
+              <td><button class="btn btn-warning" >Process</button></td>
+            </tr>
+            <tr *ngIf="ProjectFolders.length === 0">
+                <td colspan="2">No results found</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div *ngIf="activeAction === 'listFiles' && ProjectFiles.length > 0" class="mt-4">
+        <h3>List of Only Files in Project</h3>
+        <div class="m-3">
+            <input type="text" [(ngModel)]="searchFiles" (ngModelChange)="updateFilteredData()" placeholder="Search All Files" class="form-control">
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of ProjectFiles">
+              <td>{{ file }}</td>
+              <td><button class="btn btn-warning" >Process</button></td>
+            </tr>
+            <tr *ngIf="ProjectFiles.length === 0">
+                <td colspan="2">No results found</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  

@@ -1,0 +1,65 @@
+<div class="container" style="background-color: #DDDDDD;">
+    <h2>Process Project Folder</h2>
+    <div class="p-2 rounded mb-2" style="background-color: #14274E; color:white"><h4>{{ ProjectName }}</h4></div>
+    <div class="form-group">
+        <label for="outputFolderPath">Output Folder Path:</label>
+        <input name="ofp" type="text" class="form-control" id="outputFolderPath" [(ngModel)]="outputResultPath" required placeholder="C:\fakePath\ToSaveResults">
+    </div>
+    <div class="form-group">
+      <label for="outputFolderPath">Key</label>
+      <input name="key" type="text" class="form-control" id="key" [(ngModel)]="key" required placeholder="Please enter your OAPI Key...">
+  </div>
+    <button (click)="processPOM()" class="btn btn-primary my-3" [disabled]="loading">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <!-- {{ loading ? 'Processing...' : 'ProcessPom' }} --> Process POM
+    </button>
+    <div class="row">
+      <!-- First Column -->
+      <div class="col-md-8">
+        <h4>Project Folders</h4>
+        <div class="form-group my-3">
+            <label for="promptfolders">Prompt</label>
+            <input name="prompt" type="text" class="form-control" id="promptfolders" [(ngModel)]="promptForFolders" required >
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Folder Path</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let folder of projectFolders">
+              <td>{{ folder }}</td>
+              <td><button class="btn btn-primary" (click)="processFolder(folder)">Process</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Second Column -->
+      <!-- <div class="col-md-6">
+        <h4>Project Files</h4>
+        <div class="form-group my-3">
+            <label for="promptfiles">Prompt</label>
+            <input name="prompt" type="text" class="form-control" id="promptfiles" [(ngModel)]="promptForFiles" required>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of projectFiles">
+              <td>{{ file }}</td>
+              <td><button class="btn btn-primary" (click)="processFile(file)">Process</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+    
+  </div>
+  <ng-toast></ng-toast>

@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <h2>Language Selector</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="sourceLanguage">Source Language:</label>
+          <select class="form-control" id="sourceLanguage" [(ngModel)]="selectedSourceLanguage">
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="targetLanguage">Target Language:</label>
+          <select class="form-control" id="targetLanguage" [(ngModel)]="selectedTargetLanguage">
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3" (click)="checkLanguages()">Submit</button>
+  
+    <div class="mt-3" *ngIf="showMessage">
+      <div class="alert alert-warning">
+        Service is under development.
+      </div>
+    </div>
+  
+    <div class="mt-3" *ngIf="isMigrationRoute">
+      <!-- Redirect to migrate component using Angular Router -->
+      <app-migrate-language></app-migrate-language>
+      <router-outlet></router-outlet>
+    </div>
+  
+    
+  </div>
+  
